@@ -1,0 +1,22 @@
+{
+  "name": "boids",
+  "version": "1.0.0",
+  "description": "A JavaScript implementation of boids, an artificial life program, developed by Craig Reynolds in 1986, which simulates the flocking behaviour of birds.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ka1130/Boids.git"
+  },
+  "author": "Kamila Matla-Tomczyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ka1130/Boids/issues"
+  },
+  "homepage": "https://github.com/ka1130/Boids#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
