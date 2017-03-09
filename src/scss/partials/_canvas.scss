@@ -1,5 +1,8 @@
-#canvas {
+#canvasContainer {
+    height: 100vh;
     width: 80%;
-    height: 100%;
     display: flex;
+    canvas {
+        display: flex;
+    }
 }
