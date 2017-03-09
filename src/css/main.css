@@ -126,5 +126,22 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+html {
+  height: 100%; }
+
 body {
-  background-color: #302633; }
+  min-height: 100%; }
+
+body {
+  background-color: #302633;
+  height: 100%; }
+
+aside {
+  color: #efffcd;
+  width: 20%;
+  height: 100%; }
+
+#canvas {
+  width: 80%;
+  height: 100%;
+  display: flex; }
