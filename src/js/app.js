@@ -21,8 +21,8 @@
         function drawBoid() {
             ctx.beginPath();
             ctx.moveTo(100, 100);
-            ctx.lineTo(100, 300);
-            ctx.lineTo(300, 300);
+            ctx.lineTo(100, 120);
+            ctx.lineTo(110, 120);
             ctx.closePath;
 
             ctx.fillStyle = "#efffcd";
