@@ -4,14 +4,32 @@
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
 
-        const source = new Image();
-        source.src = "img/bird.svg"
-        source.width = 20;
-        source.height = 20;
+        // Make canvas 100% width and 100% height
+        resizeCanvas();
 
-        source.addEventListener("load", function() {
-            ctx.drawImage(source, 0, 0);
-        });
+        window.addEventListener("resize", resizeCanvas, false);
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth * .8;
+            canvas.height = window.innerHeight;
+
+            drawBoid();
+        }
+
+        resizeCanvas();
+
+        function drawBoid() {
+            ctx.beginPath();
+            ctx.moveTo(100, 100);
+            ctx.lineTo(100, 300);
+            ctx.lineTo(300, 300);
+            ctx.closePath;
+
+            ctx.fillStyle = "#efffcd";
+            ctx.fill();
+        }
+
+
 
 
 
