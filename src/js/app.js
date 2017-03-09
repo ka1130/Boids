@@ -20,9 +20,7 @@
 
         function drawBoid() {
             ctx.beginPath();
-            ctx.moveTo(100, 100);
-            ctx.lineTo(100, 120);
-            ctx.lineTo(110, 120);
+            ctx.arc(100, 75, 5, 0, 2 * Math.PI);
             ctx.closePath;
 
             ctx.fillStyle = "#efffcd";
