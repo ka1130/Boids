@@ -1,8 +1,13 @@
 (function() {
     document.addEventListener("DOMContentLoaded", function() {
 
+        // Define variables
+
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
+
+        const canvasContainer = document.getElementById("canvasContainer");
+        const aside = canvasContainer.previousElementSibling;
 
         // Make canvas 100% width and 100% height
         resizeCanvas();
@@ -32,13 +37,19 @@
         function getXY(event) {
             let x = event.clientX;
             let y = event.clientY;
+
+            // Get width and height of the aside to count coordinates on canvas only
+            let a = aside.offsetWidth;
+
             console.log(x, y);
+
+            x = x - a;
+
             drawBoid(x, y);
         }
 
         // Draw Boid on mouseclick
 
-        const canvasContainer = document.getElementById("canvasContainer");
 
         canvasContainer.addEventListener("click", getXY, false);
 
