@@ -28,12 +28,20 @@
             ctx.fill();
         }
 
+        // Get coordinates of the clicked position
+        function getXY(event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            console.log(x, y);
+        }
 
         // Draw Boid on mouseclick
 
         const canvasContainer = document.getElementById("canvasContainer");
 
-        canvasContainer.addEventListener("click", drawBoid, false);
+        canvasContainer.addEventListener("click", getXY, false);
+
+
 
 
 
