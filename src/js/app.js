@@ -74,12 +74,29 @@
 
             x += vX;
             y += vY;
+
+            if (x > canvas.width) {
+                x -= canvas.width;
+            }
+
+            if (y > canvas.height) {
+                y -= canvas.height;
+            }
+
+            if (x < 0) {
+                x += canvas.width;
+            }
+
+            if (y < 0) {
+                y -= canvas.width;
+            }
         }
 
         function drawLoop() {
+            let frm = window.requestAnimationFrame;
             animateBoid();
             drawBoid();
-            setTimeout(drawLoop, 20);
+            frm(drawLoop);
         }
 
 
