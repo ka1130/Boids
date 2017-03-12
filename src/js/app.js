@@ -18,14 +18,22 @@
 
         resizeCanvas();
 
-        function drawBoid() {
+        // Draw first Boid
+        function drawBoid(x = 100, y = 75) {
             ctx.beginPath();
-            ctx.arc(100, 75, 5, 0, 2 * Math.PI);
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
             ctx.closePath;
 
             ctx.fillStyle = "#efffcd";
             ctx.fill();
         }
+
+
+        // Draw Boid on mouseclick
+
+        const canvasContainer = document.getElementById("canvasContainer");
+
+        canvasContainer.addEventListener("click", drawBoid, false);
 
 
 
