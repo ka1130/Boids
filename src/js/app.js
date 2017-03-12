@@ -9,6 +9,9 @@
         const canvasContainer = document.getElementById("canvasContainer");
         const aside = canvasContainer.previousElementSibling;
 
+        let x = 100;
+        let y = 75;
+
         // Make canvas 100% width and 100% height
         resizeCanvas();
 
@@ -24,7 +27,10 @@
         resizeCanvas();
 
         // Draw first Boid
-        function drawBoid(x = 100, y = 75) {
+
+        function drawBoid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             ctx.beginPath();
             ctx.arc(x, y, 5, 0, 2 * Math.PI);
             ctx.closePath;
@@ -43,25 +49,37 @@
 
             x = x - a;
 
-            drawBoid(x, y);
+            drawBoid();
         }
 
         // Draw Boid on mouseclick
 
         canvasContainer.addEventListener("click", getXY, false);
 
+        // Animate on Shift-Click
+
         canvasContainer.addEventListener("click", function(event) {
 
             if (event.shiftKey) {
-                animateBoid();
+                drawLoop();
             }
 
         }, false);
 
         // Animate Boid
+        let vX = 2;
+        let vY = 0;
 
         function animateBoid() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            x += vX;
+            y += vY;
+        }
+
+        function drawLoop() {
+            animateBoid();
+            drawBoid();
+            setTimeout(drawLoop, 20);
         }
 
 
