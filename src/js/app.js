@@ -33,6 +33,7 @@
             let x = event.clientX;
             let y = event.clientY;
             console.log(x, y);
+            drawBoid(x, y);
         }
 
         // Draw Boid on mouseclick
