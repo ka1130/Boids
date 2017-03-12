@@ -41,8 +41,6 @@
             // Get width and height of the aside to count coordinates on canvas only
             let a = aside.offsetWidth;
 
-            console.log(x, y);
-
             x = x - a;
 
             drawBoid(x, y);
@@ -50,8 +48,21 @@
 
         // Draw Boid on mouseclick
 
-
         canvasContainer.addEventListener("click", getXY, false);
+
+        canvasContainer.addEventListener("click", function(event) {
+
+            if (event.shiftKey) {
+                animateBoid();
+            }
+
+        }, false);
+
+        // Animate Boid
+
+        function animateBoid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
 
 
 
