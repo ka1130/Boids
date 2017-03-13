@@ -52,10 +52,6 @@
             drawBoid();
         }
 
-        // Draw Boid on mouseclick
-
-        canvasContainer.addEventListener("click", getXY, false);
-
         // Animate on Shift-Click
 
         canvasContainer.addEventListener("click", function(event) {
