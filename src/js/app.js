@@ -26,6 +26,18 @@
 
         resizeCanvas();
 
+        // Array with initial boids
+
+        const initialBoids = [
+            [2, 2],
+            [3, 1],
+            [8, 5],
+            [5, 9]
+        ];
+
+        let [boid1, boid2, boid3, boid4] = initialBoids;
+        console.log(boid1, boid2, boid3, boid4);
+
         // Draw first Boid
 
         function drawBoid() {
