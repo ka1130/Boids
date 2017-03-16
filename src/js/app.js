@@ -26,17 +26,32 @@
 
         resizeCanvas();
 
-        // Array with initial boids
+        // Array with initial Boids
 
         const initialBoids = [
-            [2, 2],
-            [3, 1],
-            [8, 5],
-            [5, 9]
+            [200, 200],
+            [300, 100],
+            [800, 500],
+            [500, 900]
         ];
 
         let [boid1, boid2, boid3, boid4] = initialBoids;
-        console.log(boid1, boid2, boid3, boid4);
+
+        // Draw initial Boids
+
+        function drawInitialBoid(...boid) {
+            let [a, b] = boid; //boid's coordinates
+            console.log(...boid);
+
+            ctx.beginPath();
+            ctx.arc(a, b, 5, 0, 2 * Math.PI);
+            ctx.closePath;
+
+            ctx.fillStyle = "#efffcd";
+            ctx.fill();
+        }
+
+        drawInitialBoid(boid1, boid2, boid3, boid4);
 
         // Draw first Boid
 
@@ -44,7 +59,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.arc(x, y, 4, 0, 2 * Math.PI);
             ctx.closePath;
 
             ctx.fillStyle = "#efffcd";
@@ -52,16 +67,18 @@
         }
 
         // Get coordinates of the clicked position
+
         function getXY(event) {
             let x = event.clientX;
             let y = event.clientY;
 
             // Get width and height of the aside to count coordinates on canvas only
-            let a = aside.offsetWidth;
+            let asW = aside.offsetWidth;
 
-            x = x - a;
+            x = x - asW;
 
             drawBoid();
+            drawInitialBoid(boid1);
         }
 
         // Animate on Shift-Click
@@ -75,8 +92,8 @@
         }, false);
 
         // Animate Boid
-        let vX = 2;
-        let vY = 0;
+        let vX = 2; // x-move vector
+        let vY = 0; // y-move vector
 
         function animateBoid() {
 
