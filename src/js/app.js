@@ -36,22 +36,25 @@
         ];
 
         let [boid1, boid2, boid3, boid4] = initialBoids;
+        console.log(boid1, boid2, boid3, boid4);
 
         // Draw initial Boids
 
-        function drawInitialBoid(...boid) {
-            let [a, b] = boid; //boid's coordinates
-            console.log(...boid);
+        function drawInitialBoid(...boids) {
 
-            ctx.beginPath();
-            ctx.arc(a, b, 5, 0, 2 * Math.PI);
-            ctx.closePath;
+            initialBoids.forEach(boid => {
+                let [a, b] = boid;
+                console.log(a, b);
+                ctx.beginPath();
+                ctx.arc(a, b, 5, 0, 2 * Math.PI);
+                ctx.closePath;
 
-            ctx.fillStyle = "#efffcd";
-            ctx.fill();
+                ctx.fillStyle = "#efffcd";
+                ctx.fill();
+            });
         }
 
-        drawInitialBoid(boid1, boid2, boid3, boid4);
+        drawInitialBoid(initialBoids);
 
         // Draw first Boid
 
