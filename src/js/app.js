@@ -9,41 +9,22 @@
         const aside = canvasContainer.previousElementSibling;
 
         // Array with initial Boids
+
         const initialBoids = [
             [200, 200],
             [300, 100],
             [800, 500],
-            [500, 600]
-        ];
-
-        const initialBoids2 = [
+            [500, 600],
             [250, 250],
             [150, 150],
             [200, 300],
             [400, 200]
         ];
 
-        let [boid1, boid2, boid3, boid4] = initialBoids;
-        console.log(boid1, boid2, boid3, boid4);
-
         let x = 0;
         let y = 0;
 
         let speed = 5;
-
-        // Make canvas 100% width and 100% height
-        resizeCanvas();
-
-        window.addEventListener("resize", resizeCanvas, false);
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth * .8;
-            canvas.height = window.innerHeight;
-
-            drawInitialBoid(initialBoids);
-        }
-
-        resizeCanvas();
 
         // Add Boid class
 
@@ -64,14 +45,24 @@
             });
 
             console.log(boids);
+
         }
 
-        setBoids(initialBoids2);
+        setBoids(initialBoids);
 
+        // Make canvas 100% width and 100% height
+        resizeCanvas();
 
+        window.addEventListener("resize", resizeCanvas, false);
 
+        function resizeCanvas() {
+            canvas.width = window.innerWidth * .8;
+            canvas.height = window.innerHeight;
 
+            drawInitialBoid(initialBoids);
+        }
 
+        resizeCanvas();
 
         // Draw initial Boids
         function drawInitialBoid(...boids) {
