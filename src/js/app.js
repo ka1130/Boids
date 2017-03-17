@@ -2,15 +2,34 @@
     document.addEventListener("DOMContentLoaded", function() {
 
         // Define variables
-
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
 
         const canvasContainer = document.getElementById("canvasContainer");
         const aside = canvasContainer.previousElementSibling;
 
-        let x = 100;
-        let y = 75;
+        // Array with initial Boids
+        const initialBoids = [
+            [200, 200],
+            [300, 100],
+            [800, 500],
+            [500, 600]
+        ];
+
+        const initialBoids2 = [
+            [250, 250],
+            [150, 150],
+            [200, 300],
+            [400, 200]
+        ];
+
+        let [boid1, boid2, boid3, boid4] = initialBoids;
+        console.log(boid1, boid2, boid3, boid4);
+
+        let x = 0;
+        let y = 0;
+
+        let speed = 5;
 
         // Make canvas 100% width and 100% height
         resizeCanvas();
@@ -21,110 +40,95 @@
             canvas.width = window.innerWidth * .8;
             canvas.height = window.innerHeight;
 
-            drawBoid();
+            drawInitialBoid(initialBoids);
         }
 
         resizeCanvas();
 
-        // Array with initial Boids
+        // Add Boid class
 
-        const initialBoids = [
-            [200, 200],
-            [300, 100],
-            [800, 500],
-            [500, 900]
-        ];
+        class Boid {
+            constructor(x, y, speed) {
+                this.x = x;
+                this.y = y;
+                this.speed = speed;
+            }
+        }
 
-        let [boid1, boid2, boid3, boid4] = initialBoids;
-        console.log(boid1, boid2, boid3, boid4);
+        function setBoids(array) {
+            let boids = [];
+
+            array.forEach(element => {
+                let boid = new Boid(...element, 5);
+                boids.push(boid);
+            });
+
+            console.log(boids);
+        }
+
+        setBoids(initialBoids2);
+
+
+
+
+
 
         // Draw initial Boids
-
         function drawInitialBoid(...boids) {
-
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             initialBoids.forEach(boid => {
-                let [a, b] = boid;
-                console.log(a, b);
+                [x, y] = boid;
+
                 ctx.beginPath();
-                ctx.arc(a, b, 5, 0, 2 * Math.PI);
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
                 ctx.closePath;
 
                 ctx.fillStyle = "#efffcd";
                 ctx.fill();
             });
+
         }
 
-        drawInitialBoid(initialBoids);
-
-        // Draw first Boid
-
-        function drawBoid() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            ctx.beginPath();
-            ctx.arc(x, y, 4, 0, 2 * Math.PI);
-            ctx.closePath;
-
-            ctx.fillStyle = "#efffcd";
-            ctx.fill();
-        }
+        // drawInitialBoid(initialBoids);
 
         // Get coordinates of the clicked position
+        // function getXY(event) {
+        //     x = event.clientX;
+        //     y = event.clientY;
 
-        function getXY(event) {
-            let x = event.clientX;
-            let y = event.clientY;
+        //     // Get width and height of the aside to count coordinates on canvas only
+        //     let asW = aside.offsetWidth;
 
-            // Get width and height of the aside to count coordinates on canvas only
-            let asW = aside.offsetWidth;
-
-            x = x - asW;
-
-            drawBoid();
-            drawInitialBoid(boid1);
-        }
+        //     x = x - asW;
+        // }
 
         // Animate on Shift-Click
-
         canvasContainer.addEventListener("click", function(event) {
 
             if (event.shiftKey) {
-                drawLoop();
+                animateBoid();
             }
 
         }, false);
 
         // Animate Boid
-        let vX = 2; // x-move vector
-        let vY = 0; // y-move vector
+
 
         function animateBoid() {
+            // ctx.clearRect(x, y, canvas.width, canvas.height);
 
-            x += vX;
-            y += vY;
+            reqAnimFrame = window.requestAnimationFrame;
 
-            if (x > canvas.width) {
-                x -= canvas.width;
+            reqAnimFrame(animateBoid);
+
+            x += speed;
+
+            if (x <= 0 || x >= canvas.width) {
+                speed = -speed;
             }
 
-            if (y > canvas.height) {
-                y -= canvas.height;
-            }
+            drawInitialBoid(initialBoids);
 
-            if (x < 0) {
-                x += canvas.width;
-            }
-
-            if (y < 0) {
-                y -= canvas.width;
-            }
-        }
-
-        function drawLoop() {
-            let frm = window.requestAnimationFrame;
-            animateBoid();
-            drawBoid();
-            frm(drawLoop);
         }
 
 
