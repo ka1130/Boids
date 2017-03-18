@@ -41,7 +41,7 @@
         function setBoids(array) {
             boids = [];
             array.forEach(element => {
-                let boid = new Boid(element[0], element[1], 0);
+                let boid = new Boid(element[0], element[1], speed);
                 boids.push(boid);
             });
         }
@@ -57,22 +57,21 @@
             canvas.width = window.innerWidth * .8;
             canvas.height = window.innerHeight;
             setBoids(initialBoids);
-            drawInitialBoid(boids);
+            drawBoids(boids);
         }
 
         resizeCanvas();
 
         // Draw initial Boids
-        function drawInitialBoid(boids) {
+        function drawBoids(boids) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             boids.forEach(boid => {
                 // [x, y] = boid;
                 console.log(boid);
-                boid.x += speed;
 
-                if (boid.x <= 0 || boid.x >= canvas.width) {
-                    speed = -speed;
-                }
+                cohesion(boid);
+                separation(boid);
+                alignment(boid);
 
                 ctx.beginPath();
                 ctx.arc(boid.x, boid.y, 5, 0, 2 * Math.PI);
@@ -106,17 +105,32 @@
 
         }, false);
 
+
         // Animate Boid
-
-
         function animateBoid() {
             ctx.clearRect(x, y, canvas.width, canvas.height);
 
-
-
-            drawInitialBoid(boids);
+            drawBoids(boids);
 
             window.requestAnimationFrame(animateBoid);
+
+        }
+
+        // Function COHESION
+        function cohesion(boid) {
+            boid.x += boid.speed;
+            if (boid.x <= 0 || boid.x >= canvas.width) {
+                boid.speed = -boid.speed;
+            }
+        }
+
+        // Function SEPARATION
+        function separation(boid) {
+
+        }
+
+        // Function ALIGNMENT
+        function alignment(boid) {
 
         }
 
