@@ -74,6 +74,7 @@
                 cohesion(boid);
                 separation(boid);
                 alignment(boid);
+                modifyPosition(boid);
 
                 ctx.beginPath();
                 ctx.arc(boid.x, boid.y, 5, 0, 2 * Math.PI);
@@ -120,14 +121,23 @@
 
         // Function COHESION
         function cohesion(boid) {
-            boid.x += boid.speedX;
-            boid.y += boid.speedY;
-            if (boid.x <= 0 || boid.x >= canvas.width) {
-                boid.speedX = -boid.speedX;
-            }
-            if (boid.y <= 0 || boid.y >= canvas.height) {
-                boid.speedY = -boid.speedY;
-            }
+            let centerX = 0;
+            let centerY = 0;
+
+            boids.forEach(element => {
+                // we count all boids except for the one passed as an argument
+                if (element != boid) {
+                    centerX += element.x;
+                    centerY += element.y;
+                }
+            });
+
+            centerX = centerX / (boids.length - 1);
+            centerY = centerY / (boids.length - 1);
+
+            //we take only 10% of the value to move the boid towards center
+            boid.speedX += (centerX - boid.x) * 0.1;
+            boid.speedY += (centerY - boid.y) * 0.1;
         }
 
         // Function SEPARATION
@@ -138,6 +148,18 @@
         // Function ALIGNMENT
         function alignment(boid) {
 
+        }
+
+        // Calculate position basing on cohesion, separation and alignment
+        function modifyPosition(boid) {
+            boid.x += boid.speedX;
+            boid.y += boid.speedY;
+            if (boid.x <= 0 || boid.x >= canvas.width) {
+                boid.speedX = -boid.speedX;
+            }
+            if (boid.y <= 0 || boid.y >= canvas.height) {
+                boid.speedY = -boid.speedY;
+            }
         }
 
 
