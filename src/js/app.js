@@ -24,24 +24,26 @@
         let x = 0;
         let y = 0;
 
-        let speed = 5;
+        let speedX = 5;
+        let speedY = 7;
 
         let boids = [];
 
         // Add Boid class
 
         class Boid {
-            constructor(x1, y1, speed1) {
+            constructor(x1, y1, speedX1, speedY1) {
                 this.x = x1;
                 this.y = y1;
-                this.speed = speed1;
+                this.speedX = speedX1;
+                this.speedY = speedY1;
             }
         }
 
         function setBoids(array) {
             boids = [];
             array.forEach(element => {
-                let boid = new Boid(element[0], element[1], speed);
+                let boid = new Boid(element[0], element[1], speedX, speedY);
                 boids.push(boid);
             });
         }
@@ -118,9 +120,13 @@
 
         // Function COHESION
         function cohesion(boid) {
-            boid.x += boid.speed;
+            boid.x += boid.speedX;
+            boid.y += boid.speedY;
             if (boid.x <= 0 || boid.x >= canvas.width) {
-                boid.speed = -boid.speed;
+                boid.speedX = -boid.speedX;
+            }
+            if (boid.y <= 0 || boid.y >= canvas.height) {
+                boid.speedY = -boid.speedY;
             }
         }
 
