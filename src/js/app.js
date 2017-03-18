@@ -9,7 +9,6 @@
         const aside = canvasContainer.previousElementSibling;
 
         // Array with initial Boids
-
         const initialBoids = [
             [200, 200],
             [300, 100],
@@ -18,7 +17,13 @@
             [250, 250],
             [150, 150],
             [200, 300],
-            [400, 200]
+            [400, 200],
+            [150, 100],
+            [100, 180],
+            [300, 320],
+            [270, 200],
+            [120, 120],
+            [430, 180]
         ];
 
         let x = 0;
@@ -26,6 +31,9 @@
 
         let speedX = 0;
         let speedY = 0;
+
+        const MAX_SPEED = 5;
+        const MAX_DISTANCE = 15;
 
         let boids = [];
 
@@ -134,14 +142,29 @@
             centerX = centerX / (boids.length - 1);
             centerY = centerY / (boids.length - 1);
 
-            //we take only 10% of the value to move the boid towards center
+            // we take only 10% of the value to move the boid towards center
             boid.speedX += (centerX - boid.x) * 0.1;
             boid.speedY += (centerY - boid.y) * 0.1;
         }
 
+        // Calculate distance between the boids - necessary for the separation function
+        function calculateDistance(boid1, boid2) {
+            // we need to make use of the Pythagoras’ theorem
+            return Math.sqrt(Math.pow((boid2.x - boid1.x), 2) + Math.pow((boid2.y - boid1.y), 2));
+
+        }
+
         // Function SEPARATION
         function separation(boid) {
-
+            boids.forEach(element => {
+                if (element != boid) {
+                    let distance = calculateDistance(boid, element);
+                    if (distance < MAX_DISTANCE) {
+                        boid.speedX -= element.x - boid.x;
+                        boid.speedY -= element.y - boid.y;
+                    }
+                }
+            });
         }
 
         // Function ALIGNMENT
@@ -159,8 +182,6 @@
 
             velocityX = velocityX / (boids.length - 1);
             velocityY = velocityY / (boids.length - 1);
-
-            //we take only 10% of the value to move the boid towards center
             boid.speedX += velocityX / 8;
             boid.speedY += velocityY / 8;
 
@@ -170,16 +191,16 @@
         function modifyPosition(boid) {
 
             // maximum speed, otherwise they move too fast
-            if (boid.speedX > 5) {
-                boid.speedX = 5;
-            } else if (boid.speedX < -5) {
-                boid.speedX = -5
+            if (boid.speedX > MAX_SPEED) {
+                boid.speedX = MAX_SPEED;
+            } else if (boid.speedX < -MAX_SPEED) {
+                boid.speedX = -MAX_SPEED;
             }
 
-            if (boid.speedY > 5) {
-                boid.speedY = 5;
-            } else if (boid.speedY < -5) {
-                boid.speedY = -5
+            if (boid.speedY > MAX_SPEED) {
+                boid.speedY = MAX_SPEED;
+            } else if (boid.speedY < -MAX_SPEED) {
+                boid.speedY = -MAX_SPEED;
             }
 
             boid.x += boid.speedX;
