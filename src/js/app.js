@@ -168,6 +168,20 @@
 
         // Calculate position basing on cohesion, separation and alignment
         function modifyPosition(boid) {
+
+            // maximum speed, otherwise they move too fast
+            if (boid.speedX > 5) {
+                boid.speedX = 5;
+            } else if (boid.speedX < -5) {
+                boid.speedX = -5
+            }
+
+            if (boid.speedY > 5) {
+                boid.speedY = 5;
+            } else if (boid.speedY < -5) {
+                boid.speedY = -5
+            }
+
             boid.x += boid.speedX;
             boid.y += boid.speedY;
             if (boid.x <= 0 || boid.x >= canvas.width) {
