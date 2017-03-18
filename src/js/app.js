@@ -24,13 +24,12 @@
         let x = 0;
         let y = 0;
 
-        let speedX = 5;
-        let speedY = 7;
+        let speedX = 0;
+        let speedY = 0;
 
         let boids = [];
 
-        // Add Boid class
-
+        // Add a Boid class
         class Boid {
             constructor(x1, y1, speedX1, speedY1) {
                 this.x = x1;
@@ -147,6 +146,23 @@
 
         // Function ALIGNMENT
         function alignment(boid) {
+            let velocityX = 0;
+            let velocityY = 0;
+
+            boids.forEach(element => {
+                // we count all boids except for the one passed as an argument
+                if (element != boid) {
+                    velocityX += element.speedX;
+                    velocityY += element.speedY;
+                }
+            });
+
+            velocityX = velocityX / (boids.length - 1);
+            velocityY = velocityY / (boids.length - 1);
+
+            //we take only 10% of the value to move the boid towards center
+            boid.speedX += velocityX / 8;
+            boid.speedY += velocityY / 8;
 
         }
 
