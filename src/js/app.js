@@ -83,12 +83,13 @@
                 alignment(boid);
                 modifyPosition(boid);
 
-                ctx.beginPath();
-                ctx.arc(boid.x, boid.y, 5, 0, 2 * Math.PI);
-                ctx.closePath;
-
                 ctx.fillStyle = "#efffcd";
                 ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(boid.x, boid.y, 5, 0, 2 * Math.PI);
+                ctx.closePath();
+
             });
 
         }
