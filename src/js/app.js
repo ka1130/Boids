@@ -155,6 +155,11 @@
 
         }
 
+        // Calculate the vector's length
+        function calculateMagnitude(boid) {
+            return Math.sqrt(Math.pow(boid.speedX, 2) + Math.pow(boid.speedY, 2));
+        }
+
         // Function SEPARATION
         function separation(boid) {
             boids.forEach(element => {
@@ -192,17 +197,21 @@
         function modifyPosition(boid) {
 
             // maximum speed, otherwise they move too fast
-            if (boid.speedX > MAX_SPEED) {
-                boid.speedX = MAX_SPEED;
-            } else if (boid.speedX < -MAX_SPEED) {
-                boid.speedX = -MAX_SPEED;
-            }
+            // if (boid.speedX > MAX_SPEED) {
+            //     boid.speedX = MAX_SPEED;
+            // } else if (boid.speedX < -MAX_SPEED) {
+            //     boid.speedX = -MAX_SPEED;
+            // }
 
-            if (boid.speedY > MAX_SPEED) {
-                boid.speedY = MAX_SPEED;
-            } else if (boid.speedY < -MAX_SPEED) {
-                boid.speedY = -MAX_SPEED;
-            }
+            // if (boid.speedY > MAX_SPEED) {
+            //     boid.speedY = MAX_SPEED;
+            // } else if (boid.speedY < -MAX_SPEED) {
+            //     boid.speedY = -MAX_SPEED;
+            // }
+            let mag = calculateMagnitude(boid);
+
+            boid.speedX = (boid.speedX / mag) * MAX_SPEED;
+            boid.speedY = (boid.speedY / mag) * MAX_SPEED;
 
             boid.x += boid.speedX;
             boid.y += boid.speedY;
