@@ -32,7 +32,7 @@
         let speedX = 0;
         let speedY = 0;
 
-        const MAX_SPEED = 2;
+        const MAX_SPEED = 10;
         const MAX_DISTANCE = 15;
 
         let boids = [];
@@ -143,7 +143,7 @@
             centerX = centerX / (boids.length - 1);
             centerY = centerY / (boids.length - 1);
 
-            // we take only 10% of the value to move the boid towards center
+            // we take only 5% of the value to move the boid towards center
             boid.speedX += (centerX - boid.x) * 0.05;
             boid.speedY += (centerY - boid.y) * 0.05;
         }
