@@ -32,7 +32,7 @@
         let speedX = 0;
         let speedY = 0;
 
-        const MAX_SPEED = 5;
+        const MAX_SPEED = 2;
         const MAX_DISTANCE = 15;
 
         let boids = [];
@@ -144,8 +144,8 @@
             centerY = centerY / (boids.length - 1);
 
             // we take only 10% of the value to move the boid towards center
-            boid.speedX += (centerX - boid.x) * 0.1;
-            boid.speedY += (centerY - boid.y) * 0.1;
+            boid.speedX += (centerX - boid.x) * 0.05;
+            boid.speedY += (centerY - boid.y) * 0.05;
         }
 
         // Calculate distance between the boids - necessary for the separation function
