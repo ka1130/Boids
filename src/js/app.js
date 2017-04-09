@@ -1,5 +1,5 @@
-(function() {
-    document.addEventListener("DOMContentLoaded", function() {
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
         // Define variables
         const canvas = document.getElementById("canvas");
@@ -83,12 +83,22 @@
                 alignment(boid);
                 modifyPosition(boid);
 
-                ctx.fillStyle = "#efffcd";
-                ctx.fill();
+                // ctx.fillStyle = "#efffcd";
+                // ctx.fill();
+
+                // ctx.beginPath();
+                // ctx.arc(boid.x, boid.y, 5, 0, 2 * Math.PI);
+                // ctx.closePath();
 
                 ctx.beginPath();
-                ctx.arc(boid.x, boid.y, 5, 0, 2 * Math.PI);
-                ctx.closePath();
+                ctx.strokeStyle = "#efffcd";
+                ctx.lineWidth = "4";
+
+                // ctx.moveTo(boid.x - 40, boid.y - 40);   // Create a starting point.
+                ctx.arc(boid.x, boid.y, 20, 1.25 * Math.PI, 1.75 * Math.PI);
+                ctx.arc(boid.x + 30, boid.y, 20, 1.25 * Math.PI, 1.75 * Math.PI);
+                ctx.stroke();
+                // ctx.closePath();
 
             });
 
@@ -108,7 +118,7 @@
         // }
 
         // Animate on Shift-Click
-        canvasContainer.addEventListener("click", function(event) {
+        canvasContainer.addEventListener("click", function (event) {
 
             if (event.shiftKey) {
                 animateBoid();
@@ -222,6 +232,8 @@
                 boid.speedY = -boid.speedY;
             }
         }
+
+        // Creare flying boid
 
 
 
